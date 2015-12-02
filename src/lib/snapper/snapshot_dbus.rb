@@ -43,7 +43,6 @@ module Yast2
                                                      escape(userdata)).first
           log.debug("create_single_snapshot config_name:#{config_name} description:#{description} "\
                    "cleanup:#{cleanup} userdata:#{userdata} result:#{result}")
-          puts "El resultado de creación es #{result.inspect}"
           result
         end
 
@@ -69,7 +68,7 @@ module Yast2
         end
 
 
-        def delete_snapshots(config_name, nums)
+        def delete(config_name, nums)
           result = dbus_object.DeleteSnapshots(config_name, nums).first
           log.debug("delete_snapshots config_name:#{config_name} nums:#{nums} result:#{result}")
 
@@ -113,7 +112,6 @@ module Yast2
         def list_snapshots(config_name = nil)
           result = dbus_object.ListSnapshots(config_name).first
           log.debug("list_snapshots for name #{config_name} result:#{result}")
-
           result
         end
 

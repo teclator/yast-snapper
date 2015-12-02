@@ -75,16 +75,19 @@ module Yast2
           strategy.all(configs).find {|s| s.number == number }
         end
 
-        def create_single(config_name, description, cleanup, user_data)
-          strategy.create_single(config_name, description, cleanup, user_data)   
+        def create_single(config_name, description, cleanup, user_data = {}, strategy = Snapshot.default_strategy)
+          num = strategy.create_single(config_name, description, cleanup, user_data)   
+          num ? find(num, config_name) : nil
         end
 
-        def create_pre(config_name, description, cleanup, user_data)
-          strategy.create_pre(config_name, description, cleanup, user_data)   
+        def create_pre(config_name, description, cleanup, user_data = {}, strategy = Snapshot.default_strategy)
+          num = strategy.create_pre(config_name, description, cleanup, user_data)   
+          num ? find(num, config_name) : nil
         end
 
-        def create_post(config_name, description, cleanup, user_data)
-          strategy.create_post(config_name, description, cleanup, user_data)   
+        def create_post(config_name, pre_number, description, cleanup, user_data = {}, strategy = Snapshot.default_strategy)
+          num = strategy.create_post(config_name, description, cleanup, user_data)
+          num ? find(num, config_name) : nil
         end
 
         private
