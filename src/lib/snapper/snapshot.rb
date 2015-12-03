@@ -90,15 +90,6 @@ module Yast2
           num ? find(num, config_name) : nil
         end
 
-        private
-
-        def method_missing(method_name, *arguments, &block)
-          if Snapshot.default_strategy.respond_to? method_name
-            Snapshot.default_strategy.send(method_name, *arguments, &block)
-          else
-            super
-          end
-        end
       end
     end
   end
