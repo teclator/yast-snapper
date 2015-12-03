@@ -22,6 +22,7 @@ module Yast2
           configs = list_configs if !configs
           snapshots = [configs].flatten.each_with_object([]) do |config, a|
             list_snapshots(config).each do |snapshot|
+              next if snapshot[0] == 0
               s = {
                 "num" => snapshot[0],
                 "type" => TYPE_INT_TO_SYMBOL[snapshot[1]],
